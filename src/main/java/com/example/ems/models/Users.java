@@ -1,4 +1,4 @@
-package com.example.ems;
+package com.example.ems.models;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

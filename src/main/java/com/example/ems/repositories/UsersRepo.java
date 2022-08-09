@@ -1,5 +1,6 @@
-package com.example.ems;
+package com.example.ems.repositories;
 
+import com.example.ems.models.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

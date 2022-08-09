@@ -1,5 +1,9 @@
-package com.example.ems;
+package com.example.ems.controllers;
 
+import com.example.ems.models.Employees;
+import com.example.ems.models.Users;
+import com.example.ems.services.EmployeesServiceImpl;
+import com.example.ems.services.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,11 +15,9 @@ import java.util.List;
 public class UsersController {
 
     @Autowired
-    UsersRepo usersRepo;
-
+    UsersServiceImpl usersServiceImpl;
     @Autowired
-    EmployeesRepo employeesRepo;
-
+    EmployeesServiceImpl employeesServiceImpl;
     @RequestMapping("/")
     public String loginpage(){
         return "loginpage.jsp";
@@ -24,7 +26,7 @@ public class UsersController {
     @PostMapping("/newuser")
     public String newuser(@ModelAttribute Users user){
         if(user.getUsername()!=null && user.getPassword()!=null){
-            usersRepo.save(user);
+            usersServiceImpl.saveUser(user);
         }
         return "loginpage.jsp";
     }
@@ -32,14 +34,14 @@ public class UsersController {
     @PostMapping("/profilepage")
     public String profilepage(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
 
-        Users user=usersRepo.findById(username).orElse(null);
+        Users user=usersServiceImpl.getUserByUsername(username);
         if(user==null){
             return "loginpage.jsp";
         }
         if(user.getPassword().equals(password)==false){
             return "loginpage.jsp";
         }
-        List<Employees> list=employeesRepo.findByEmpmanager(username);
+        List<Employees> list=employeesServiceImpl.getEmployee(username);
         model.addAttribute("list",list);
         return "profilepage.jsp";
     }
@@ -48,10 +50,7 @@ public class UsersController {
     @GetMapping("/profilepage")
     @ResponseBody
     public List<Employees> viewprofile(){
-        List<Employees> list=employeesRepo.findAll();
+        List<Employees> list=employeesServiceImpl.getAllEmployees();
         return list;
     }
-
-
-
 }

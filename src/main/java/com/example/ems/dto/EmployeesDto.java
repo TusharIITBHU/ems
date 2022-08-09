@@ -1,15 +1,8 @@
-package com.example.ems;
+package com.example.ems.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 
-@Entity
-public class Employees {
+public class EmployeesDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int empid;
     private String empname;
     private String empdepartment;
@@ -38,6 +31,7 @@ public class Employees {
     public void setEmpdepartment(String empdepartment) {
         this.empdepartment = empdepartment;
     }
+
     public String getEmpmanager() {
         return empmanager;
     }
@@ -48,7 +42,7 @@ public class Employees {
 
     @Override
     public String toString() {
-        return "Employees{" +
+        return "EmployeesDto{" +
                 "empid=" + empid +
                 ", empname='" + empname + '\'' +
                 ", empdepartment='" + empdepartment + '\'' +
