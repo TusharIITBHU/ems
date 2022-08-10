@@ -1,56 +1,47 @@
 package com.example.ems.controllers;
 
-import com.example.ems.models.Employees;
 import com.example.ems.models.Users;
 import com.example.ems.services.EmployeesServiceImpl;
 import com.example.ems.services.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
-@Controller
+@RestController
 public class UsersController {
 
     @Autowired
     UsersServiceImpl usersServiceImpl;
     @Autowired
     EmployeesServiceImpl employeesServiceImpl;
+
     @RequestMapping("/")
     public String loginpage(){
-        return "loginpage.jsp";
+        return "login page";
     }
 
     @PostMapping("/newuser")
-    public String newuser(@ModelAttribute Users user){
-        if(user.getUsername()!=null && user.getPassword()!=null){
+    public String newuser(@RequestBody Users user){
+        if(user.getUsername()!=null && user.getPassword()!=null && !user.getPassword().isEmpty()){
             usersServiceImpl.saveUser(user);
+            return "registration successfull";
         }
-        return "loginpage.jsp";
+        return "registration unsuccessfull try again!!";
     }
 
     @PostMapping("/profilepage")
-    public String profilepage(@RequestParam("username") String username, @RequestParam("password") String password, Model model) {
+    public Users profilepage(@RequestBody Users users) {
 
-        Users user=usersServiceImpl.getUserByUsername(username);
+        Users user=usersServiceImpl.getUserByUsername(users.getUsername());
         if(user==null){
-            return "loginpage.jsp";
+            return null;
         }
-        if(user.getPassword().equals(password)==false){
-            return "loginpage.jsp";
+        if(!user.getPassword().equals(users.getPassword())){
+            return null;
         }
-        List<Employees> list=employeesServiceImpl.getEmployee(username);
-        model.addAttribute("list",list);
-        return "profilepage.jsp";
+        return user;
     }
 
-    //postman
-    @GetMapping("/profilepage")
-    @ResponseBody
-    public List<Employees> viewprofile(){
-        List<Employees> list=employeesServiceImpl.getAllEmployees();
-        return list;
-    }
 }
