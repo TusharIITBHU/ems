@@ -1,11 +1,10 @@
 package com.example.ems.models;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document
 public class Users {
-    @Id
+
     private String username;
     private String password;
 
