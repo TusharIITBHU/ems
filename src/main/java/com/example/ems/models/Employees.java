@@ -1,10 +1,14 @@
 package com.example.ems.models;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
+
+import javax.annotation.Generated;
 
 @Document
 public class Employees {
-
+    @MongoId
     private int empid;
     private String empname;
     private String empdepartment;

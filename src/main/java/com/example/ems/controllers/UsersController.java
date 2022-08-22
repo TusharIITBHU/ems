@@ -4,10 +4,7 @@ import com.example.ems.models.Users;
 import com.example.ems.services.EmployeesServiceImpl;
 import com.example.ems.services.UsersServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UsersController {
@@ -31,7 +28,7 @@ public class UsersController {
         return "registration unsuccessfull try again!!";
     }
 
-    @PostMapping("/profilepage")
+    @GetMapping("/profilepage")// not working
     public Users profilepage(@RequestBody Users users) {
 
         Users user=usersServiceImpl.getUserByUsername(users.getUsername());

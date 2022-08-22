@@ -24,6 +24,7 @@ public class EmployeesController {
     @PostMapping("/addemployee")
     public List<Employees> addemployee(@RequestBody EmployeesDto employeesDto){
         Employees emp=new Employees();
+        emp.setEmpid(employeesDto.getEmpid());
         emp.setEmpname(employeesDto.getEmpname());
         emp.setEmpdepartment(employeesDto.getEmpdepartment());
         emp.setEmpmanager(employeesDto.getEmpmanager());

@@ -1,6 +1,5 @@
 package com.example.ems.dto;
 
-
 public class EmployeesDto {
 
     private int empid;

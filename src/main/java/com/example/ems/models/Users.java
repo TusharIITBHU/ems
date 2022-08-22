@@ -1,10 +1,11 @@
 package com.example.ems.models;
 
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Document
 public class Users {
-
+    @MongoId
     private String username;
     private String password;
 
