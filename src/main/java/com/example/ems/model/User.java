@@ -1,10 +1,10 @@
-package com.example.ems.models;
+package com.example.ems.model;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
 @Document
-public class Users {
+public class User {
     @MongoId
     private String username;
     private String password;
@@ -26,7 +26,7 @@ public class Users {
 
     @Override
     public String toString() {
-        return "Users{" +
+        return "User{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
