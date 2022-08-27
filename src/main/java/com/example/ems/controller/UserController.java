@@ -1,5 +1,6 @@
 package com.example.ems.controller;
 
+import com.example.ems.dto.UserDto;
 import com.example.ems.model.User;
 import com.example.ems.service.EmployeeServiceImpl;
 import com.example.ems.service.UserServiceImpl;
@@ -15,37 +16,36 @@ public class UserController {
     @Autowired
     EmployeeServiceImpl employeeServiceImpl;
 
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @RequestMapping("/")
+    @RequestMapping("/login")
     public String loginPage(){
         return "Login Page";
     }
 
-    @PostMapping("/addUser")
-    public String addUser(@RequestBody User user){
-        if(user.getUsername()!=null && user.getPassword()!=null && !user.getPassword().isEmpty()){
-            User user1=new User();
-            user1.setUsername(user.getUsername());
-            user1.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-            userServiceImpl.saveUser(user1);
+    @PostMapping("/signup")
+    public String addUser(@RequestBody UserDto userDto){
+        if(!userDto.getUsername().isEmpty() && !userDto.getPassword().isEmpty()){
+            userServiceImpl.saveUser(userDto);
             return "registration successfull";
         }
-        return "registration unsuccessfull try again!!";
+        else {
+            return "registration unsuccessfull try again!!";
+        }
     }
 
     @GetMapping("/getUser")
-    public User getUser(@RequestBody User user) {
+    public User getUser(@RequestBody UserDto userDto) {
 
-        User output=userServiceImpl.getUserByUsername(user.getUsername());
-        if(output==null){
+        User user=userServiceImpl.getUserByUsername(userDto.getUsername());
+        if(user==null){
             return null;
         }
-        if(!user.getPassword().equals(user.getPassword())){
+        if(!user.getPassword().equals(userDto.getPassword())){
             return null;
         }
-        return output;
+        return user;
     }
 
 }

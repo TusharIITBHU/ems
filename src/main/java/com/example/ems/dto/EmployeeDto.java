@@ -3,7 +3,8 @@ package com.example.ems.dto;
 public class EmployeeDto {
 
     private int empId;
-    private String empName;
+    private String empFirstName;
+    private String empLastName;
     private String empDepartment;
     private String empManager;
 
@@ -15,12 +16,20 @@ public class EmployeeDto {
         this.empId = empId;
     }
 
-    public String getEmpName() {
-        return empName;
+    public String getEmpFirstName() {
+        return empFirstName;
     }
 
-    public void setEmpName(String empName) {
-        this.empName = empName;
+    public void setEmpFirstName(String empFirstName) {
+        this.empFirstName = empFirstName;
+    }
+
+    public String getEmpLastName() {
+        return empLastName;
+    }
+
+    public void setEmpLastName(String empLastName) {
+        this.empLastName = empLastName;
     }
 
     public String getEmpDepartment() {
@@ -39,11 +48,13 @@ public class EmployeeDto {
         this.empManager = empManager;
     }
 
+
     @Override
     public String toString() {
         return "EmployeeDto{" +
                 "empId=" + empId +
-                ", empName='" + empName + '\'' +
+                ", empFirstName='" + empFirstName + '\'' +
+                ", empLastName='" + empLastName + '\'' +
                 ", empDepartment='" + empDepartment + '\'' +
                 ", empManager='" + empManager + '\'' +
                 '}';

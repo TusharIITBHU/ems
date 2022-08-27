@@ -7,7 +7,8 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 public class Employee {
     @MongoId
     private int empId;
-    private String empName;
+    private String empFirstName;
+    private String empLastName;
     private String empDepartment;
     private String empManager;
 
@@ -19,12 +20,19 @@ public class Employee {
         this.empId = empId;
     }
 
-    public String getEmpName() {
-        return empName;
+    public String getEmpFirstName() {
+        return empFirstName;
     }
 
-    public void setEmpName(String empName) {
-        this.empName = empName;
+    public void setEmpFirstName(String empFirstName) {
+        this.empFirstName = empFirstName;
+    }
+    public String getEmpLastName() {
+        return empLastName;
+    }
+
+    public void setEmpLastName(String empLastName) {
+        this.empLastName = empLastName;
     }
 
     public String getEmpDepartment() {
@@ -46,9 +54,12 @@ public class Employee {
     public String toString() {
         return "Employee{" +
                 "empId=" + empId +
-                ", empName='" + empName + '\'' +
+                ", empFirstName='" + empFirstName + '\'' +
+                ", empLastName='" + empLastName + '\'' +
                 ", empDepartment='" + empDepartment + '\'' +
                 ", empManager='" + empManager + '\'' +
                 '}';
     }
+
+
 }

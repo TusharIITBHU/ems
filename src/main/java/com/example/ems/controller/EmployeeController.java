@@ -2,9 +2,9 @@ package com.example.ems.controller;
 
 import com.example.ems.dto.EmployeeDto;
 import com.example.ems.model.Employee;
-import com.example.ems.model.User;
 import com.example.ems.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,38 +17,34 @@ public class EmployeeController {
 
     @PostMapping("/addEmployee")
     public List<Employee> addEmployee(@RequestBody EmployeeDto employeeDto){
-        Employee emp=new Employee();
-        emp.setEmpId(employeeDto.getEmpId());
-        emp.setEmpName(employeeDto.getEmpName());
-        emp.setEmpDepartment(employeeDto.getEmpDepartment());
-        emp.setEmpManager(employeeDto.getEmpManager());
-        employeeServiceImpl.saveEmployee(emp);
+        employeeServiceImpl.saveEmployee(employeeDto);
         List<Employee> list=employeeServiceImpl.getEmployeeByManager(employeeDto.getEmpManager());
         return list;
     }
 
-    @GetMapping("/getEmployee")
-    public List<Employee> getEmployee(@RequestBody User user){
-        List<Employee> list=employeeServiceImpl.getEmployeeByManager(user.getUsername());
+    @GetMapping("/getEmployees")
+    public List<Employee> getEmployees(Authentication authentication){
+        List<Employee> list=employeeServiceImpl.getEmployeeByManager(authentication.getName());
+        return list;
+    }
+    @GetMapping("/getemployee/{empId}")
+    public Employee getEmployeeById(@PathVariable("empId") int empId){
+        Employee employee = employeeServiceImpl.getEmployeeById(empId);
+        return employee;
+    }
+
+    @PutMapping ("/updateEmployee/{empId}")
+    public List<Employee> updateEmployee(@PathVariable("empId") int empId,@RequestBody EmployeeDto employeeDto){
+        Employee employee= employeeServiceImpl.updateEmployeeById(empId,employeeDto);
+        List<Employee> list=employeeServiceImpl.getEmployeeByManager(employee.getEmpManager());
         return list;
     }
 
-    @PutMapping ("/updateEmployee")
-    public List<Employee> updateEmployee(@RequestBody EmployeeDto employeeDto){
-        Employee emp= employeeServiceImpl.getEmployeeById(employeeDto.getEmpId());
-        emp.setEmpName(employeeDto.getEmpName());
-        emp.setEmpDepartment(employeeDto.getEmpDepartment());
-        emp.setEmpManager(employeeDto.getEmpManager());
-        employeeServiceImpl.saveEmployee(emp);
-        List<Employee> list=employeeServiceImpl.getEmployeeByManager(employeeDto.getEmpManager());
-        return list;
-    }
-
-
-    @DeleteMapping("/deleteEmployee")
-    public List<Employee> deleteEmployee(@RequestBody EmployeeDto employeeDto){
-        employeeServiceImpl.deleteEmployeeById(employeeDto.getEmpId());
-        List<Employee> list=employeeServiceImpl.getEmployeeByManager(employeeDto.getEmpManager());
+    @DeleteMapping("/deleteEmployee/{empId}")
+    public List<Employee> deleteEmployee(@PathVariable("empId") int empId){
+        Employee employee=employeeServiceImpl.getEmployeeById(empId);
+        employeeServiceImpl.deleteEmployeeById(empId);
+        List<Employee> list=employeeServiceImpl.getEmployeeByManager(employee.getEmpManager());
         return list;
     }
 
