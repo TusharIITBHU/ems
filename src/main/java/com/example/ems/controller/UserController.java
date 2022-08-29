@@ -25,7 +25,9 @@ public class UserController {
         if(authentication.isAuthenticated()){
             return new OutputDto(null,HttpStatus.OK);
         }
-        return new OutputDto(null, HttpStatus.UNAUTHORIZED);
+        else{
+            return new OutputDto(null, HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @PostMapping("/signup")
@@ -34,9 +36,7 @@ public class UserController {
             userServiceImpl.saveUser(userDto);
             return new OutputDto(userDto,HttpStatus.CREATED);
         }
-        else {
             return new OutputDto(null,HttpStatus.BAD_REQUEST);
-        }
     }
 
 }
