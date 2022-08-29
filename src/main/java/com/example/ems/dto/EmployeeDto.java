@@ -2,61 +2,61 @@ package com.example.ems.dto;
 
 public class EmployeeDto {
 
-    private int empId;
-    private String empFirstName;
-    private String empLastName;
-    private String empDepartment;
-    private String empManager;
+    private int id;
+    private String firstName;
+    private String lastName;
+    private String department;
+    private String manager;
 
-    public int getEmpId() {
-        return empId;
+    public int getId() {
+        return id;
     }
 
-    public void setEmpId(int empId) {
-        this.empId = empId;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getEmpFirstName() {
-        return empFirstName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setEmpFirstName(String empFirstName) {
-        this.empFirstName = empFirstName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getEmpLastName() {
-        return empLastName;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setEmpLastName(String empLastName) {
-        this.empLastName = empLastName;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getEmpDepartment() {
-        return empDepartment;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setEmpDepartment(String empDepartment) {
-        this.empDepartment = empDepartment;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 
-    public String getEmpManager() {
-        return empManager;
+    public String getManager() {
+        return manager;
     }
 
-    public void setEmpManager(String empManager) {
-        this.empManager = empManager;
+    public void setManager(String manager) {
+        this.manager = manager;
     }
 
 
     @Override
     public String toString() {
         return "EmployeeDto{" +
-                "empId=" + empId +
-                ", empFirstName='" + empFirstName + '\'' +
-                ", empLastName='" + empLastName + '\'' +
-                ", empDepartment='" + empDepartment + '\'' +
-                ", empManager='" + empManager + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", department='" + department + '\'' +
+                ", manager='" + manager + '\'' +
                 '}';
     }
 }

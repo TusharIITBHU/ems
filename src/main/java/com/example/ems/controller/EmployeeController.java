@@ -18,7 +18,7 @@ public class EmployeeController {
     @PostMapping("/addEmployee")
     public List<Employee> addEmployee(@RequestBody EmployeeDto employeeDto){
         employeeServiceImpl.saveEmployee(employeeDto);
-        List<Employee> list=employeeServiceImpl.getEmployeeByManager(employeeDto.getEmpManager());
+        List<Employee> list=employeeServiceImpl.getEmployeeByManager(employeeDto.getManager());
         return list;
     }
 
@@ -27,24 +27,25 @@ public class EmployeeController {
         List<Employee> list=employeeServiceImpl.getEmployeeByManager(authentication.getName());
         return list;
     }
-    @GetMapping("/getemployee/{empId}")
-    public Employee getEmployeeById(@PathVariable("empId") int empId){
-        Employee employee = employeeServiceImpl.getEmployeeById(empId);
+    @GetMapping("/getEmployee/{id}")
+    public Employee getEmployeeById(@PathVariable("id") int id){
+        Employee employee = employeeServiceImpl.getEmployeeById(id);
         return employee;
     }
 
-    @PutMapping ("/updateEmployee/{empId}")
-    public List<Employee> updateEmployee(@PathVariable("empId") int empId,@RequestBody EmployeeDto employeeDto){
-        Employee employee= employeeServiceImpl.updateEmployeeById(empId,employeeDto);
-        List<Employee> list=employeeServiceImpl.getEmployeeByManager(employee.getEmpManager());
+    @PutMapping ("/updateEmployee/{id}")
+    public List<Employee> updateEmployee(@PathVariable("id") int id,@RequestBody EmployeeDto employeeDto){
+        String oldmanager=employeeServiceImpl.getEmployeeById(id).getManager();
+        employeeServiceImpl.updateEmployeeById(id,employeeDto);
+        List<Employee> list=employeeServiceImpl.getEmployeeByManager(oldmanager);
         return list;
     }
 
-    @DeleteMapping("/deleteEmployee/{empId}")
-    public List<Employee> deleteEmployee(@PathVariable("empId") int empId){
-        Employee employee=employeeServiceImpl.getEmployeeById(empId);
-        employeeServiceImpl.deleteEmployeeById(empId);
-        List<Employee> list=employeeServiceImpl.getEmployeeByManager(employee.getEmpManager());
+    @DeleteMapping("/deleteEmployee/{id}")
+    public List<Employee> deleteEmployee(@PathVariable("id") int id){
+        String oldmanager=employeeServiceImpl.getEmployeeById(id).getManager();
+        employeeServiceImpl.deleteEmployeeById(id);
+        List<Employee> list=employeeServiceImpl.getEmployeeByManager(oldmanager);
         return list;
     }
 

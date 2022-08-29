@@ -16,40 +16,40 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public void saveEmployee(EmployeeDto employeeDto) {
         Employee employee=new Employee();
-        employee.setEmpId(employeeDto.getEmpId());
-        employee.setEmpFirstName(employeeDto.getEmpFirstName());
-        employee.setEmpLastName(employeeDto.getEmpLastName());
-        employee.setEmpDepartment(employeeDto.getEmpDepartment());
-        employee.setEmpManager(employeeDto.getEmpManager());
+        employee.setId(employeeDto.getId());
+        employee.setFirstName(employeeDto.getFirstName());
+        employee.setLastName(employeeDto.getLastName());
+        employee.setDepartment(employeeDto.getDepartment());
+        employee.setManager(employeeDto.getManager());
         employeeRepo.save(employee);
     }
     @Override
-    public List<Employee> getEmployeeByManager(String empManager) {
-        return employeeRepo.findByEmpManager(empManager);
+    public List<Employee> getEmployeeByManager(String manager) {
+        return employeeRepo.findByManager(manager);
     }
 
     @Override
-    public Employee getEmployeeById(int empId) {
-        return employeeRepo.findById(empId).orElse(null);
+    public Employee getEmployeeById(int id) {
+        return employeeRepo.findById(id).orElse(null);
     }
 
     @Override
-    public Employee updateEmployeeById(int empId, EmployeeDto employeeDto) {
-        Employee employee= employeeRepo.findById(empId).orElse(null);
+    public Employee updateEmployeeById(int id, EmployeeDto employeeDto) {
+        Employee employee= employeeRepo.findById(id).orElse(null);
         if(employee==null){
             return null;
         }
-        employee.setEmpFirstName(employeeDto.getEmpFirstName());
-        employee.setEmpLastName(employeeDto.getEmpLastName());
-        employee.setEmpDepartment(employeeDto.getEmpDepartment());
-        employee.setEmpManager(employeeDto.getEmpManager());
+        employee.setFirstName(employeeDto.getFirstName());
+        employee.setLastName(employeeDto.getLastName());
+        employee.setDepartment(employeeDto.getDepartment());
+        employee.setManager(employeeDto.getManager());
         employeeRepo.save(employee);
         return employee;
     }
 
     @Override
-    public void deleteEmployeeById(int empId) {
-        employeeRepo.deleteById(empId);
+    public void deleteEmployeeById(int id) {
+        employeeRepo.deleteById(id);
     }
 
 }

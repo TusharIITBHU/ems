@@ -6,60 +6,60 @@ import org.springframework.data.mongodb.core.mapping.MongoId;
 @Document
 public class Employee {
     @MongoId
-    private int empId;
-    private String empFirstName;
-    private String empLastName;
-    private String empDepartment;
-    private String empManager;
+    private int id;
+    private String firstName;
+    private String lastName;
+    private String department;
+    private String manager;
 
-    public int getEmpId() {
-        return empId;
-    }
-
-    public void setEmpId(int empId) {
-        this.empId = empId;
+    public int getId() {
+        return id;
     }
 
-    public String getEmpFirstName() {
-        return empFirstName;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setEmpFirstName(String empFirstName) {
-        this.empFirstName = empFirstName;
-    }
-    public String getEmpLastName() {
-        return empLastName;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setEmpLastName(String empLastName) {
-        this.empLastName = empLastName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getEmpDepartment() {
-        return empDepartment;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setEmpDepartment(String empDepartment) {
-        this.empDepartment = empDepartment;
-    }
-    public String getEmpManager() {
-        return empManager;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setEmpManager(String empManager) {
-        this.empManager = empManager;
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
+    public String getManager() {
+        return manager;
+    }
+
+    public void setManager(String manager) {
+        this.manager = manager;
     }
 
     @Override
     public String toString() {
         return "Employee{" +
-                "empId=" + empId +
-                ", empFirstName='" + empFirstName + '\'' +
-                ", empLastName='" + empLastName + '\'' +
-                ", empDepartment='" + empDepartment + '\'' +
-                ", empManager='" + empManager + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", department='" + department + '\'' +
+                ", manager='" + manager + '\'' +
                 '}';
     }
-
-
 }
