@@ -1,12 +1,16 @@
 package com.example.ems.controller;
 
+import com.example.ems.dto.OutputDto;
 import com.example.ems.dto.UserDto;
-import com.example.ems.model.User;
 import com.example.ems.service.EmployeeServiceImpl;
 import com.example.ems.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserController {
@@ -16,36 +20,23 @@ public class UserController {
     @Autowired
     EmployeeServiceImpl employeeServiceImpl;
 
-//    @Autowired
-//    BCryptPasswordEncoder bCryptPasswordEncoder;
-
-    @RequestMapping("/login")
-    public String loginPage(){
-        return "Login Page";
+    @GetMapping("/login")
+    public OutputDto loginPage(Authentication authentication){
+        if(authentication.isAuthenticated()){
+            return new OutputDto(null,HttpStatus.OK);
+        }
+        return new OutputDto(null, HttpStatus.UNAUTHORIZED);
     }
 
     @PostMapping("/signup")
-    public String addUser(@RequestBody UserDto userDto){
+    public OutputDto addUser(@RequestBody UserDto userDto){
         if(!userDto.getUsername().isEmpty() && !userDto.getPassword().isEmpty()){
             userServiceImpl.saveUser(userDto);
-            return "registration successfull";
+            return new OutputDto(userDto,HttpStatus.CREATED);
         }
         else {
-            return "registration unsuccessfull try again!!";
+            return new OutputDto(null,HttpStatus.BAD_REQUEST);
         }
-    }
-
-    @GetMapping("/getUser")
-    public User getUser(@RequestBody UserDto userDto) {
-
-        User user=userServiceImpl.getUserByUsername(userDto.getUsername());
-        if(user==null){
-            return null;
-        }
-        if(!user.getPassword().equals(userDto.getPassword())){
-            return null;
-        }
-        return user;
     }
 
 }

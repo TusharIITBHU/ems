@@ -14,7 +14,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     EmployeeRepo employeeRepo;
 
     @Override
-    public void saveEmployee(EmployeeDto employeeDto) {
+    public Employee saveEmployee(EmployeeDto employeeDto) {
         Employee employee=new Employee();
         employee.setId(employeeDto.getId());
         employee.setFirstName(employeeDto.getFirstName());
@@ -22,6 +22,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setDepartment(employeeDto.getDepartment());
         employee.setManager(employeeDto.getManager());
         employeeRepo.save(employee);
+        return employee;
     }
     @Override
     public List<Employee> getEmployeeByManager(String manager) {

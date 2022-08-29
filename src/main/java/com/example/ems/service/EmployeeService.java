@@ -6,7 +6,7 @@ import com.example.ems.model.Employee;
 import java.util.List;
 
 public interface EmployeeService {
-    void saveEmployee(EmployeeDto employeeDto);
+    Employee saveEmployee(EmployeeDto employeeDto);
     Employee getEmployeeById(int id);
     void deleteEmployeeById(int id);
     List<Employee> getEmployeeByManager(String manager);
