@@ -2,6 +2,7 @@ package com.example.ems.controller;
 
 import com.example.ems.dto.OutputDto;
 import com.example.ems.dto.UserDto;
+import com.example.ems.exception.ResourceNotFoundException;
 import com.example.ems.service.EmployeeServiceImpl;
 import com.example.ems.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,18 +26,13 @@ public class UserController {
         if(authentication.isAuthenticated()){
             return new OutputDto(null,HttpStatus.OK);
         }
-        else{
             return new OutputDto(null, HttpStatus.UNAUTHORIZED);
-        }
     }
 
     @PostMapping("/signup")
-    public OutputDto addUser(@RequestBody UserDto userDto){
-        if(!userDto.getUsername().isEmpty() && !userDto.getPassword().isEmpty()){
+    public OutputDto addUser(@RequestBody UserDto userDto) throws ResourceNotFoundException {
             userServiceImpl.saveUser(userDto);
             return new OutputDto(userDto,HttpStatus.CREATED);
-        }
-            return new OutputDto(null,HttpStatus.BAD_REQUEST);
     }
 
 }
