@@ -2,8 +2,6 @@ package com.example.ems.controller;
 
 import com.example.ems.dto.EmployeeDto;
 import com.example.ems.dto.OutputDto;
-import com.example.ems.exception.GlobalExceptionHandler;
-import com.example.ems.exception.ResourceNotFoundException;
 import com.example.ems.model.Employee;
 import com.example.ems.service.EmployeeServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +18,7 @@ public class EmployeeController {
     EmployeeServiceImpl employeeServiceImpl;
 
     @PostMapping("/addEmployee")
-    public OutputDto addEmployee(@RequestBody EmployeeDto employeeDto) throws ResourceNotFoundException {
+    public OutputDto addEmployee(@RequestBody EmployeeDto employeeDto){
         Employee employee=employeeServiceImpl.saveEmployee(employeeDto);
         return new OutputDto(employee,HttpStatus.CREATED);
     }
@@ -31,13 +29,13 @@ public class EmployeeController {
         return new OutputDto(list,HttpStatus.OK);
     }
     @GetMapping("/getEmployee/{id}")
-    public OutputDto getEmployeeById(@PathVariable("id") int id) throws ResourceNotFoundException{
+    public OutputDto getEmployeeById(@PathVariable("id") int id){
         Employee employee = employeeServiceImpl.getEmployeeById(id);
         return new OutputDto(employee,HttpStatus.OK);
     }
 
     @PutMapping ("/updateEmployee/{id}")
-    public OutputDto updateEmployee(@PathVariable("id") int id,@RequestBody EmployeeDto employeeDto) throws ResourceNotFoundException{
+    public OutputDto updateEmployee(@PathVariable("id") int id,@RequestBody EmployeeDto employeeDto){
         String oldmanager=employeeServiceImpl.getEmployeeById(id).getManager();
         employeeServiceImpl.updateEmployeeById(id,employeeDto);
         List<Employee> list=employeeServiceImpl.getEmployeeByManager(oldmanager);
@@ -45,7 +43,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/deleteEmployee/{id}")
-    public OutputDto deleteEmployee(@PathVariable("id") int id) throws ResourceNotFoundException{
+    public OutputDto deleteEmployee(@PathVariable("id") int id){
         String oldmanager=employeeServiceImpl.getEmployeeById(id).getManager();
         employeeServiceImpl.deleteEmployeeById(id);
         List<Employee> list=employeeServiceImpl.getEmployeeByManager(oldmanager);
