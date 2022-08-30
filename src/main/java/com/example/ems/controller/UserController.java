@@ -8,12 +8,10 @@ import com.example.ems.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5000")
 public class UserController {
 
     @Autowired
@@ -21,7 +19,7 @@ public class UserController {
     @Autowired
     EmployeeServiceImpl employeeServiceImpl;
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public OutputDto loginPage(Authentication authentication){
         if(authentication.isAuthenticated()){
             return new OutputDto(null,HttpStatus.OK);

@@ -24,8 +24,10 @@ public class MySecurityConfig{
 
         http
                 .csrf().disable()
+                .cors()
+                .and()
                 .authorizeRequests()
-                .antMatchers("/login","/signup","/getUser").permitAll()
+                .antMatchers("/login","/signup").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()

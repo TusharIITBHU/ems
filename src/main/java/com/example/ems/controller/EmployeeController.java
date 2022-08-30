@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:5000")
 public class EmployeeController {
 
     @Autowired
@@ -40,7 +41,7 @@ public class EmployeeController {
         String oldmanager=employeeServiceImpl.getEmployeeById(id).getManager();
         employeeServiceImpl.updateEmployeeById(id,employeeDto);
         List<Employee> list=employeeServiceImpl.getEmployeeByManager(oldmanager);
-        return new OutputDto(list,HttpStatus.OK);
+        return new OutputDto(list,HttpStatus.CREATED);
     }
 
     @DeleteMapping("/deleteEmployee/{id}")
