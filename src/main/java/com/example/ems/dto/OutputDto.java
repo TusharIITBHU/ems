@@ -6,12 +6,13 @@ public class OutputDto {
 
     private Object object;
     private HttpStatus httpStatus;
-    private String message;
 
-    public OutputDto(Object object, HttpStatus httpStatus, String message) {
+    private ErrorDto errorDto;
+
+    public OutputDto(Object object, HttpStatus httpStatus, ErrorDto errorDto) {
         this.object = object;
         this.httpStatus = httpStatus;
-        this.message = message;
+        this.errorDto = errorDto;
     }
 
     public OutputDto(Object object, HttpStatus httpStatus) {
@@ -23,11 +24,23 @@ public class OutputDto {
         return object;
     }
 
+    public void setObject(Object object) {
+        this.object = object;
+    }
+
     public HttpStatus getHttpStatus() {
         return httpStatus;
     }
 
-    public String getMessage() {
-        return message;
+    public void setHttpStatus(HttpStatus httpStatus) {
+        this.httpStatus = httpStatus;
+    }
+
+    public ErrorDto getErrorDto() {
+        return errorDto;
+    }
+
+    public void setErrorDto(ErrorDto errorDto) {
+        this.errorDto = errorDto;
     }
 }

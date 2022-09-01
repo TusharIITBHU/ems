@@ -10,6 +10,6 @@ public class GlobalExceptionHandler{
 
     @ExceptionHandler(ResourceNotFoundException.class)
     public OutputDto handleExceptions(ResourceNotFoundException exception){
-        return new OutputDto(null, HttpStatus.INTERNAL_SERVER_ERROR, exception.getMessage());
+        return new OutputDto(null, HttpStatus.INTERNAL_SERVER_ERROR, exception.getErrorDto());
     }
 }

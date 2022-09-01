@@ -1,6 +1,7 @@
 package com.example.ems.service;
 
 import com.example.ems.dto.EmployeeDto;
+import com.example.ems.dto.ErrorDto;
 import com.example.ems.exception.ResourceNotFoundException;
 import com.example.ems.model.Employee;
 import com.example.ems.repository.EmployeeRepo;
@@ -17,7 +18,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee saveEmployee(EmployeeDto employeeDto) throws ResourceNotFoundException {
 
         if(employeeRepo.existsById(employeeDto.getId())){
-            throw new ResourceNotFoundException("EMPLOYEE_WITH_THIS_ID_ALREADY_EXIST");
+            throw new ResourceNotFoundException(new ErrorDto("EMPLOYEE_EXIST","Employee with this id already exist"));
         }
         Employee employee=new Employee();
         employee.setId(employeeDto.getId());
@@ -37,7 +38,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee getEmployeeById(int id) throws ResourceNotFoundException {
         Employee employee=employeeRepo.findById(id).orElse(null);
         if(employee==null){
-            throw new ResourceNotFoundException("EMPLOYEE_NOT_FOUND");
+            throw new ResourceNotFoundException(new ErrorDto("EMPLOYEE_NOT_FOUND","Employee with this id does not exist"));
         }
         return employee;
     }
@@ -46,7 +47,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee updateEmployeeById(int id, EmployeeDto employeeDto) throws ResourceNotFoundException {
         Employee employee= employeeRepo.findById(id).orElse(null);
         if(employee==null){
-            throw new ResourceNotFoundException("EMPLOYEE_NOT_FOUND");
+            throw new ResourceNotFoundException(new ErrorDto("EMPLOYEE_NOT_FOUND","Employee with this id does not exist, hence cannot update"));
         }
         employee.setFirstName(employeeDto.getFirstName());
         employee.setLastName(employeeDto.getLastName());
@@ -60,7 +61,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteEmployeeById(int id) throws ResourceNotFoundException{
         Employee employee=employeeRepo.findById(id).orElse(null);
         if(employee==null){
-            throw new ResourceNotFoundException("EMPLOYEE_NOT_FOUND");
+            throw new ResourceNotFoundException(new ErrorDto("EMPLOYEE_NOT_FOUND","Employee with this id does not exist, hence cannot delete"));
         }
         employeeRepo.deleteById(id);
     }

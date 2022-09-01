@@ -1,5 +1,6 @@
 package com.example.ems.service;
 
+import com.example.ems.dto.ErrorDto;
 import com.example.ems.dto.UserDto;
 import com.example.ems.exception.ResourceNotFoundException;
 import com.example.ems.model.User;
@@ -15,9 +16,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public void saveUser(UserDto userDto) throws ResourceNotFoundException {
         if(userDto.getUsername().isEmpty() || userDto.getPassword().isEmpty()){
-            throw new ResourceNotFoundException("WRONG_CREDENTIALS");
+            throw new ResourceNotFoundException(new ErrorDto("INVALID_CREDENTIALS","Type in correct username and password"));
         } else if (userRepo.existsById(userDto.getUsername())){
-            throw new ResourceNotFoundException("USER_ALREADY_EXIST");
+            throw new ResourceNotFoundException(new ErrorDto("USER_ALREADY_EXIST","try loging in!"));
         }
         User user=new User();
         user.setUsername(userDto.getUsername());

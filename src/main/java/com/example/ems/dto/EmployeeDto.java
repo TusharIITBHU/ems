@@ -1,6 +1,7 @@
 package com.example.ems.dto;
 
-public class EmployeeDto {
+
+public class EmployeeDto{
 
     private int id;
     private String firstName;

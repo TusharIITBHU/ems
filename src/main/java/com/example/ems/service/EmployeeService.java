@@ -11,5 +11,5 @@ public interface EmployeeService {
     Employee getEmployeeById(int id) throws ResourceNotFoundException;
     void deleteEmployeeById(int id) throws ResourceNotFoundException;
     List<Employee> getEmployeeByManager(String manager);
-    Employee updateEmployeeById(int id, EmployeeDto employeeDto) throws ResourceNotFoundException;
+    Employee updateEmployeeById(int id,EmployeeDto employeeDto) throws ResourceNotFoundException;
 }

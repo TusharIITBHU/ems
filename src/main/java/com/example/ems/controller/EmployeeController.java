@@ -41,7 +41,7 @@ public class EmployeeController {
         String oldmanager=employeeServiceImpl.getEmployeeById(id).getManager();
         employeeServiceImpl.updateEmployeeById(id,employeeDto);
         List<Employee> list=employeeServiceImpl.getEmployeeByManager(oldmanager);
-        return new OutputDto(list,HttpStatus.CREATED);
+        return new OutputDto(list,HttpStatus.OK);
     }
 
     @DeleteMapping("/deleteEmployee/{id}")
