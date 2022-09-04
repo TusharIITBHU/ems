@@ -20,12 +20,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         if(employeeRepo.existsById(employeeDto.getId())){
             throw new ResourceNotFoundException(new ErrorDto("EMPLOYEE_EXIST","Employee with this id already exist"));
         }
-        Employee employee=new Employee();
-        employee.setId(employeeDto.getId());
-        employee.setFirstName(employeeDto.getFirstName());
-        employee.setLastName(employeeDto.getLastName());
-        employee.setDepartment(employeeDto.getDepartment());
-        employee.setManager(employeeDto.getManager());
+        Employee employee = new Employee(employeeDto.getId(), employeeDto.getFirstName(), employeeDto.getLastName(), employeeDto.getDepartment(), employeeDto.getManager());
         employeeRepo.save(employee);
         return employee;
     }

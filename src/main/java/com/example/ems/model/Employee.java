@@ -52,6 +52,14 @@ public class Employee {
         this.manager = manager;
     }
 
+    public Employee(int id, String firstName, String lastName, String department, String manager) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.department = department;
+        this.manager = manager;
+    }
+
     @Override
     public String toString() {
         return "Employee{" +

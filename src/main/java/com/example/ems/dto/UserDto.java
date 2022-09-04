@@ -20,6 +20,11 @@ public class UserDto {
         this.password = password;
     }
 
+    public UserDto(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     @Override
     public String toString() {
         return "UserDto{" +

@@ -6,7 +6,6 @@ public class OutputDto {
 
     private Object object;
     private HttpStatus httpStatus;
-
     private ErrorDto errorDto;
 
     public OutputDto(Object object, HttpStatus httpStatus, ErrorDto errorDto) {

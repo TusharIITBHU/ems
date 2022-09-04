@@ -49,6 +49,13 @@ public class EmployeeDto{
         this.manager = manager;
     }
 
+    public EmployeeDto(int id, String firstName, String lastName, String department, String manager) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.department = department;
+        this.manager = manager;
+    }
 
     @Override
     public String toString() {
