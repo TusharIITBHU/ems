@@ -6,6 +6,5 @@ import com.example.ems.model.User;
 
 public interface UserService {
     User saveUser(UserDto userDto) throws ResourceNotFoundException;
-
     boolean checkUser(UserDto userDto);
 }

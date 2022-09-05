@@ -3,6 +3,8 @@ package com.example.ems.model;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.MongoId;
 
+import java.util.Objects;
+
 @Document
 public class Employee {
     @MongoId
@@ -58,6 +60,19 @@ public class Employee {
         this.lastName = lastName;
         this.department = department;
         this.manager = manager;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return id == employee.id && firstName.equals(employee.firstName) && lastName.equals(employee.lastName) && department.equals(employee.department) && manager.equals(employee.manager);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, department, manager);
     }
 
     @Override

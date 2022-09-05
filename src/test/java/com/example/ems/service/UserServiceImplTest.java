@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import java.util.Optional;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.when;
@@ -32,9 +30,9 @@ class UserServiceImplTest {
         UserDto userDto = new UserDto("tush", "tush");
         when(userRepo.save(actualUser)).thenReturn(actualUser);
         try {
-            assertThat(expectedUser.equals(userServiceImpl.saveUser(userDto)));
+            assertThat(expectedUser.equals(userServiceImpl.saveUser(userDto))).isEqualTo(true);
         } catch (ResourceNotFoundException e) {
-            assertThat(e.getMessage());
+            assertThat(e.getErrorDto().getMessage());
         }
     }
 
@@ -46,23 +44,23 @@ class UserServiceImplTest {
             userServiceImpl.saveUser(userDto);
             fail();
         } catch (ResourceNotFoundException e) {
-            assertThat(e.getMessage());
+            assertThat(e.getErrorDto().getMessage());
         }
     }
 
     @Test
-    public void saveUserFailureTwoTest() {
-        String id = "green";
-        UserDto userDto = new UserDto(id, "222");
-        when(userRepo.findById(id)).thenReturn(Optional.ofNullable(actualUser));
+    public void saveUserFailureTwoTest() {//nw
+        String id = "tush";
+        UserDto userDto = new UserDto(id, "tush");
+        when(userRepo.existsById(id)).thenReturn(true);
         when(userRepo.save(actualUser)).thenReturn(actualUser);
         try {
-            if (expectedUser.equals(actualUser)) {
+            if (expectedUser.equals(userServiceImpl.saveUser(userDto))) {
                 fail();
             }
-            userServiceImpl.saveUser(userDto);
         } catch (ResourceNotFoundException e) {
-            assertThat(e.getMessage());
+            System.out.println("ok");
+            assertThat(e.getErrorDto().getMessage());
         }
     }
 }

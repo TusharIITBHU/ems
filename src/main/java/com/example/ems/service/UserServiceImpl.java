@@ -24,7 +24,6 @@ public class UserServiceImpl implements UserService {
         userRepo.save(user);
         return user;
     }
-
     @Override
     public boolean checkUser(UserDto userDto) {
         if ((userRepo.existsById(userDto.getUsername())) && (userDto.getPassword().equals((userRepo.findById(userDto.getUsername())).get().getPassword()))) {
