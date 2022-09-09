@@ -2,29 +2,21 @@ package com.example.ems.dto;
 
 import org.springframework.http.HttpStatus;
 
-public class OutputDto {
+public class OutputDto<T> {
 
-    private Object object;
+    private T data;
     private HttpStatus httpStatus;
     private ErrorDto errorDto;
 
-    public OutputDto(Object object, HttpStatus httpStatus, ErrorDto errorDto) {
-        this.object = object;
+    public OutputDto(T data, HttpStatus httpStatus, ErrorDto errorDto) {
+        this.data = data;
         this.httpStatus = httpStatus;
         this.errorDto = errorDto;
     }
 
-    public OutputDto(Object object, HttpStatus httpStatus) {
-        this.object = object;
+    public OutputDto(T data, HttpStatus httpStatus) {
+        this.data = data;
         this.httpStatus = httpStatus;
-    }
-
-    public Object getObject() {
-        return object;
-    }
-
-    public void setObject(Object object) {
-        this.object = object;
     }
 
     public HttpStatus getHttpStatus() {
@@ -41,5 +33,13 @@ public class OutputDto {
 
     public void setErrorDto(ErrorDto errorDto) {
         this.errorDto = errorDto;
+    }
+
+    public T getData() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
     }
 }

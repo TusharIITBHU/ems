@@ -22,15 +22,8 @@ public class UserController {
     @Autowired
     EmployeeServiceImpl employeeServiceImpl;
 
-    //    @PostMapping("/login")
-//    public OutputDto loginPage(Authentication authentication){
-//        if(authentication.isAuthenticated()){
-//            return new OutputDto(null,HttpStatus.OK);
-//        }
-//            return new OutputDto(null, HttpStatus.UNAUTHORIZED);
-//    }
     @PostMapping("/login")
-    public OutputDto loginPage(Authentication authentication, @RequestBody UserDto userDto) {
+    public OutputDto<Boolean> loginPage(Authentication authentication, @RequestBody UserDto userDto) {
 
         if (authentication.isAuthenticated() && userServiceImpl.checkUser(userDto)) {
 
@@ -47,7 +40,7 @@ public class UserController {
     @PostMapping("/signup")
     public OutputDto addUser(@RequestBody UserDto userDto) throws ResourceNotFoundException {
         userServiceImpl.saveUser(userDto);
-        return new OutputDto(userDto, HttpStatus.CREATED);
+        return new OutputDto(null, HttpStatus.CREATED);
     }
 
 }

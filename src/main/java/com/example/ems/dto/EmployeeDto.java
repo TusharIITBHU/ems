@@ -2,7 +2,6 @@ package com.example.ems.dto;
 
 
 public class EmployeeDto{
-
     private int id;
     private String firstName;
     private String lastName;

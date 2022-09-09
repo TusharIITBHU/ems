@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
         if (userDto.getUsername().isEmpty() || userDto.getPassword().isEmpty()) {
             throw new ResourceNotFoundException(new ErrorDto("INVALID_CREDENTIALS", "Type in correct username and password"));
         } else if (userRepo.existsById(userDto.getUsername())) {
-            throw new ResourceNotFoundException(new ErrorDto("USER_ALREADY_EXIST", "try loging in!"));
+            throw new ResourceNotFoundException(new ErrorDto("USER_ALREADY_EXIST", "try logging in!"));
         }
         User user = new User(userDto.getUsername(), userDto.getPassword());
         userRepo.save(user);
